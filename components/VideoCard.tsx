@@ -1,4 +1,5 @@
-type Props = {
+type VideoCardProps = {
+  videoId: string;
   title: string;
   channel: string;
   views: string;
@@ -6,29 +7,37 @@ type Props = {
 };
 
 export default function VideoCard({
+  videoId,
   title,
   channel,
   views,
   time,
-}: Props) {
+}: VideoCardProps) {
   return (
-    <div className="cursor-pointer">
-      <div className="w-full aspect-video bg-neutral-800 rounded-lg mb-3 flex items-center justify-center text-gray-500">
-        Thumbnail
+    <div className="space-y-2">
+      <div className="aspect-video w-full rounded-xl overflow-hidden bg-neutral-800">
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full"
+        />
       </div>
 
       <div className="flex gap-3">
         <div className="w-9 h-9 rounded-full bg-neutral-700" />
+
         <div>
-          <div className="font-semibold line-clamp-2">
+          <h3 className="font-semibold text-sm line-clamp-2">
             {title}
-          </div>
-          <div className="text-sm text-gray-400">
+          </h3>
+          <p className="text-xs text-neutral-400">
             {channel}
-          </div>
-          <div className="text-sm text-gray-400">
+          </p>
+          <p className="text-xs text-neutral-400">
             {views} • {time}
-          </div>
+          </p>
         </div>
       </div>
     </div>
